@@ -1,0 +1,19 @@
+{
+  "name": "blocipedia",
+  "version": "1.0.0",
+  "description": "A wikipedia-like application",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "export NODE_ENV=test && jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Justinelliott11375/Blocipedia.git"
+  },
+  "author": "Justin Elliott",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Justinelliott11375/Blocipedia/issues"
+  },
+  "homepage": "https://github.com/Justinelliott11375/Blocipedia#readme"
+}
