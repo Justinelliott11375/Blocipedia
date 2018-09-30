@@ -6,7 +6,7 @@ const expressValidator = require("express-validator");
 const session = require("express-session");
 const flash = require("express-flash");
 const passportConfig = require("./passport-config");
-
+const logger = require("morgan");
 module.exports = {
     init(app, express){
         app.set("views", viewsFolder);
@@ -27,5 +27,6 @@ module.exports = {
             res.locals.currentUser = req.user;
             next();
         })
+        app.use(logger("dev"));
     }
 };
