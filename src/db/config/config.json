@@ -1,19 +1,21 @@
 {
   "development": {
-    "username": "postgre",
-    "password": null,
-    "database": "blocipedia",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
-    "operatorsAliases": false
-  },
-  "test": {
     "username": "postgres",
     "password": null,
     "database": "blocipedia",
     "host": "127.0.0.1",
     "dialect": "postgres",
+    "logging": false,
     "operatorsAliases": false
+  },
+  "test": {
+    "username": "postgres",
+    "password": null,
+    "database": "blocipedia-test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false,
+    "logging": false
   },
   "production": {
     "username": "postgres",
@@ -21,6 +23,7 @@
     "database": "blocipedia",
     "host": "127.0.0.1",
     "dialect": "postgres",
+    "logging": false,
     "use_env_variable": "DATABASE_URL"
   }
 }
