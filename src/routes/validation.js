@@ -30,7 +30,7 @@ module.exports = {
 
     validateUserSignIn(req, res, next) {
         if(req.method === "POST") {
-            req.checkBody("username", "must consist of only letters and numbers").isAlphanumeric();
+            req.checkBody("email", "must be a valid email").isEmail();
             req.checkBody("password", "must be at least 6 characters in length").isLength({min: 6})
         }
 

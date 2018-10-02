@@ -11,10 +11,10 @@ module.exports = {
 
 
         passport.use(new LocalStrategy({
-            usernameField: "username"
-        }, (username, password, done) => {
+            usernameField: "email"
+        }, (email, password, done) => {
             User.findOne({
-                where: { username }
+                where: { email }
             })
             .then((user) => {
 

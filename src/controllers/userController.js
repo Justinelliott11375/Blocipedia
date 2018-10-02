@@ -31,10 +31,7 @@ module.exports = {
     },
 
     signIn(req, res, next) {
-        console.log('ATTEMPTING');
-        console.log(req);
 ;        passport.authenticate("local")(req, res, function() {
-            console.log("attempting 2");
             if(!req.user){
                 console.log("error")
                 req.flash("notice", "Sign in failed. Please try again.")
