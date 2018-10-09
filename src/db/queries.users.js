@@ -31,7 +31,44 @@ module.exports = {
         .catch((err) => {
             callback(err);
         })
-    }
+    },
+
+    getUser(id, callback) {
+        let result = {};
+        User.findById(id)
+        .then((user) => {
+            if(!user) {
+                console.log("error 404");
+                callback(404);
+            } else {
+                console.log(".then else statement fired");
+                result["user"] = user;
+                callback(null, result);
+            }
+        })
+        .catch((err) => {
+            callback(err);
+        })
+    },
+
+    updateUserRole(user, action) {
+        let newRole;
+    
+        User.findOne({
+          where: { email: user.email }
+        })
+        .then((user) => {
+          if (action === "upgrade") {
+            newRole = "premium";
+          } else {
+            newRole = "standard";
+          }
+    
+          user.update({
+            role: newRole
+          })
+        })
+      }
 };
 
 

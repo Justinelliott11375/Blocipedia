@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../static/partials/head.ejs %>
+    </head>
+    <body>
+
+        <% include ../static/partials/navbar.ejs %>
+
+        <main class="container">
+
+        <% include ../static/partials/messages.ejs %>
+
+        <h1><%= `${user.username}'s profile` %></h1>
+        <h5><%= `Email: ${user.email}` %></h5>
+		<h5><%= `Role: ${user.role}` %></h5>
+		<h5><%= `Member since: ${user.createdAt}`%></h5>
+
+        <% if(currentUser && currentUser.role == "standard") { %>
+            <h2>Upgrade to a premium membership here</h2>
+            <ul>
+					<li></li>
+					<li>Payment test credentials:</li>
+					<ul>
+					<li>Card Number: 4242 4242 4242 4242</li>
+					<li>Exp Date: Any Date(MM/YY format)</li>
+					<li>CVC Number: Any 3 Digit Number</li>
+					</ul>
+				</ul>
+
+            <form action="/users/<%=currentUser.id%>/upgrade" method="POST">
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_dTwq1s9L2aRKonJ1idkQTLtF"
+            data-amount="1500"
+            data-name="Stripe.com"
+            data-description="Example Membership Upgrade Charge"
+            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+            data-locale="auto">
+                </script>
+            </form>
+        <% } %>
+
+       
+    </main>
+
+    <% include ../static/partials/baseScripts.ejs %>
+
+    </body>
+</html>
