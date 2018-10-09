@@ -14,6 +14,10 @@ module.exports = class ApplicationPolicy {
         return this.record && (this.record.userId === userId);
     }
 
+    _isPublic() {
+        return this.record.private === false;
+    }
+
     _isAdmin() {
         return this.user && this.user.role === "admin";
     }
