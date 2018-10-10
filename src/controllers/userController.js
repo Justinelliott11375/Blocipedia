@@ -1,4 +1,5 @@
-const userQueries = require("../db/queries.users.js")
+const userQueries = require("../db/queries.users.js");
+const wikiQueries = require("../db/queries.wikis.js");
 const passport = require("passport");
 const User = require("../db/models").User;
 const publicKey = "pk_test_qpRslJfT2QYfpT6it4gHu1ox";
@@ -117,6 +118,7 @@ module.exports = {
         
         let action = "downgrade";
         userQueries.updateUserRole(req.user, action);
+        wikiQueries.publicizeAllWikis(req.user.id);
         req.flash("notice", "Downgrade successful!");
         res.redirect(req.get('referer'));
     }

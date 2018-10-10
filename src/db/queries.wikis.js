@@ -89,5 +89,18 @@ module.exports = {
         .catch((err) => {
             callback(err);
         });
+    },
+
+    publicizeAllWikis(id) {
+        Wiki.findAll({
+            where: { userId: id }
+        })
+        .then((wikis) => {
+            wikis.forEach((wiki) => {
+                wiki.update({
+                    private: false
+                })
+            })
+        })
     }
 }

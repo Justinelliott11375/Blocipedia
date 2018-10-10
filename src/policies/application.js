@@ -9,6 +9,10 @@ module.exports = class ApplicationPolicy {
         return this.user && this.user.role == "standard";
     }
 
+    _isPremium() {
+        return this.user && this.user.role === "premium";
+    }
+
     _isOwner() {
         const userId = parseInt(this.user.id);
         return this.record && (this.record.userId === userId);
@@ -16,6 +20,10 @@ module.exports = class ApplicationPolicy {
 
     _isPublic() {
         return this.record.private === false;
+    }
+
+    _isPrivate() {
+        return this.record.private === true;
     }
 
     _isAdmin() {
@@ -35,8 +43,7 @@ module.exports = class ApplicationPolicy {
     }
 
     edit() {
-        return this.new() &&
-            this.record && (this._isOwner() || this._isAdmin());
+        return this.new();
     }
 
     update() {
