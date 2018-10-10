@@ -52,6 +52,7 @@ module.exports = {
     },
 
     updateUserRole(user, action) {
+        console.log(user);
         let newRole;
     
         User.findOne({

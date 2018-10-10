@@ -2,7 +2,7 @@ const userQueries = require("../db/queries.users.js")
 const passport = require("passport");
 const User = require("../db/models").User;
 const publicKey = "pk_test_qpRslJfT2QYfpT6it4gHu1ox";
-const secretKey = "sk_test_C2J9qnd7WoAEhCyYA3Zlne37";
+const secretKey = process.env.secretTestKey;
 var stripe = require("stripe")(secretKey);
 
 module.exports = {
@@ -55,13 +55,15 @@ module.exports = {
     },
     
     show(req, res, next){
-
         userQueries.getUser(req.params.id, (err, result) => {
             console.log("getUser fired");
+            console.log("result: " + result);
             if(err || result.user === undefined){
+                console.log(err);
                 req.flash("notice", "No user found with that ID.");
                 res.redirect("/");
             } else {
+             console.log("Showing users page...");
              res.render("users/show", {...result});
             }
         });
@@ -74,20 +76,20 @@ module.exports = {
     upgrade(req, res, next) {
         const email = req.body.stripeEmail;
         const token = req.body.stripeToken;
-        console.log("token: " + token);
+        console.log(typeof token);
         console.log(publicKey);
         console.log(secretKey);
         stripe.customers.create({
-			email: email,
-            source: token,
+            email: email,
+            source: token
         })
         .then((customer) => {
-            console.log(customer);
+            console.log("customer: " + customer);
             stripe.charges.create({
                 amount: 1500,
                 description:  "Premium Membership Fee",
                 currency: "usd",
-                customer: customer.id,
+                customer: customer.id
             });
         })
         .then((charge) => {
@@ -99,8 +101,9 @@ module.exports = {
                 req.flash("notice", "Upgrade successful!");
                 res.render("static/index");
               } else {
+                console.log("error");
                 req.flash("notice", "Error upgrading, please try again");
-                res.redirect("/users/upgrade");
+                res.redirect(`/users/${req.user.id}`);
               }
         });
     }

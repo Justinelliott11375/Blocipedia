@@ -19,7 +19,6 @@
         <% if(currentUser && currentUser.role == "standard") { %>
             <h2>Upgrade to a premium membership here</h2>
             <ul>
-					<li></li>
 					<li>Payment test credentials:</li>
 					<ul>
 					<li>Card Number: 4242 4242 4242 4242</li>
@@ -30,7 +29,7 @@
 
             <form action="/users/<%=currentUser.id%>/upgrade" method="POST">
                 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="pk_test_dTwq1s9L2aRKonJ1idkQTLtF"
+            data-key="pk_test_qpRslJfT2QYfpT6it4gHu1ox"
             data-amount="1500"
             data-name="Stripe.com"
             data-description="Example Membership Upgrade Charge"
