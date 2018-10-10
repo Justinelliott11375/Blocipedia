@@ -39,6 +39,15 @@
             </form>
         <% } %>
 
+        <% if(currentUser && currentUser.role == "premium") { %>
+            <h2>Revert to standard membership here</h2>
+            <h5>Downgrading your membership will make all of your private wikis public</h5>
+
+            <form action="/users/<%=currentUser.id%>/downgrade" method="POST">
+                <button type="submit" class="btn btn-primary">Revert to standard membership</button>
+            </form>
+        <% } %>
+
        
     </main>
 

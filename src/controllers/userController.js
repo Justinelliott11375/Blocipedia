@@ -76,35 +76,48 @@ module.exports = {
     upgrade(req, res, next) {
         const email = req.body.stripeEmail;
         const token = req.body.stripeToken;
-        console.log(typeof token);
         console.log(publicKey);
         console.log(secretKey);
+        console.log(token);
         stripe.customers.create({
             email: email,
             source: token
         })
         .then((customer) => {
             console.log("customer: " + customer);
-            stripe.charges.create({
+            let customerCharge = stripe.charges.create({
                 amount: 1500,
                 description:  "Premium Membership Fee",
                 currency: "usd",
                 customer: customer.id
             });
+            return customerCharge;
         })
         .then((charge) => {
             console.log("charge");
             console.log(charge);
             if (charge) {
                 let action = "upgrade";
-                userQueries.updateUserRole(user, action);
+                userQueries.updateUserRole(req.user, action);
                 req.flash("notice", "Upgrade successful!");
-                res.render("static/index");
+                res.redirect("/");
               } else {
                 console.log("error");
                 req.flash("notice", "Error upgrading, please try again");
-                res.redirect(`/users/${req.user.id}`);
+                res.redirect(`users/${req.user.id}`);
               }
         });
+    },
+
+    downgradeForm(req, res, next) {
+		res.render("users/downgrade", { publicKey });
+    },
+
+    downgrade(req, res, next) {
+        
+        let action = "downgrade";
+        userQueries.updateUserRole(req.user, action);
+        req.flash("notice", "Downgrade successful!");
+        res.redirect(req.get('referer'));
     }
 }

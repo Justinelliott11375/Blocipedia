@@ -61,7 +61,7 @@ module.exports = {
         .then((user) => {
           if (action === "upgrade") {
             newRole = "premium";
-          } else {
+          } else if(action === "downgrade") {
             newRole = "standard";
           }
     
