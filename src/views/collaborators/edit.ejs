@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../static/partials/head.ejs %>
+    </head>
+    <body>
+        <% include ../static/partials/navbar.ejs %>
+        <main class="container">
+            <% include ../static/partials/messages.ejs %>
+            
+        <h4>Users Authorized to Collaborate</h4>
+        <div class="row" id="collaborator">
+       
+
+          <form action="/wikis/<%= wiki.id %>/collaborators/destroy" method="post">
+            <% collaborators.forEach((collaborator) => { %>
+              <ul class="list-group">
+                <li class="list-group-item">
+                    <p>
+                        <%= collaborator.username %>
+                    </p>
+                    <button type="submit" name="collabToDelete" class="btn btn-danger" value="<%= collaborator.id %>">Delete</button>
+                </li>
+              </ul>
+            <% }) %>
+          </form>
+        </div>
+        <div>
+            <form action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
+                Add Collaborator by Username: 
+                <input type="text" name="username">
+                <button class="btn btn-success" type="submit">add</button>
+            </form>
+        </div>
+    </main>
+
+        </main>
+        <% include ../static/partials/baseScripts.ejs %>
+
+    </body>
+</html>

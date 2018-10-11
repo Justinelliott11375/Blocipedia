@@ -7,30 +7,57 @@
         <% include ../static/partials/navbar.ejs %>
         <main class="container">
             <% include ../static/partials/messages.ejs %>
-            <h1>Public Wikis</h1>
+            <h1>Wikis</h1>
 
             <% if(currentUser) { %>
                 <a href="/wikis/new" class="btn btn-success">New Wiki</a>
             <% } %>
             <ul class="list-group">
                 <% wikis.forEach((wiki) => { %>
-                    <% if(!currentUser || currentUser && currentUser.role === "standard") { %>
+                    <% if(!currentUser || currentUser && currentUser.role === "standard" || currentUser && currentUser.role === "standard") { %>
                         <% if(wiki.private === false) {%>
 
                             <li class="list-group-item">
-                                <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+                                <a href="/wikis/<%= wiki.id %>"> <%- wiki.title %> </a>
                             </li>
                         <% } %>
                     <% } %>
 
-                    <% if(currentUser && currentUser.role === "admin" || currentUser && currentUser.role === "premium") { %>
+                    <% if(currentUser && currentUser.role === "admin") { %>
                         <li class="list-group-item">
-                            <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+                            <a href="/wikis/<%= wiki.id %>"> <%- wiki.title %> </a>
                         </li>
+                    <% } %>
+
+                    <% if(currentUser && currentUser.role === "premium") { %>
+                        <% if(wiki.userId === currentUser.id) { %>
+                        <li class="list-group-item">
+                            <a href="/wikis/<%= wiki.id %>"> <%- wiki.title %> </a>
+                        </li>
+                        <% } %>
                     <% } %>
                 <% }) %>
             </ul>
 
+            <% if(currentUser && currentUser.role === "standard" || currentUser && currentUser.role === "premium") { %>
+                <h1>Collaborative Wikis</h1>
+
+                <ul class="list-group">
+                    <% wikis.forEach((wiki) => { %>
+                        <% if (wiki.private) { %>
+                            <% collaborators.forEach((collaborator) => { %>
+                                <% if (collaborator.wikiId === wiki.id) { %>
+                                    <li class="list-group-item">
+                                        <a href="/wikis/<%= wiki.id %>">
+                                        <%- wiki.title %>
+                                        </a>
+                                    </li>
+                                <% } %>
+                            <% }) %>
+                        <% } %>
+                    <% }) %>
+                </ul>
+            <% } %>
         </main>
     </body>
 </html>

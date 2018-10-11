@@ -10,6 +10,11 @@
             
             <h1>Edit Wiki</h1>
 
+            <form action="/wikis/<%= wiki.id %>/collaborators" method="post">
+                <a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-success">Add/Edit Collaborators</a>
+                </form>
+      
+
             <form action="/wikis/<%= wiki.id %>/update" method="post">
                 <div class="form-group">
                     <label for="title">Wiki title</label>
