@@ -64,7 +64,7 @@ module.exports = {
                 });
             } else {
                 req.flash("notice", "You are not authorized to do that.");
-                callback("Forbidden");
+                callback(401);
             }
         });
     },
@@ -83,7 +83,7 @@ module.exports = {
             }
             else {
                 req.flash("notice", "You are not authorized to do that.")
-                callback(401);
+                callback(null, wiki);
             }
         })
         .catch((err) => {

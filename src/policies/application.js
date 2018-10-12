@@ -1,3 +1,5 @@
+const Collaborator = require("../db/models").Collaborator;
+
 module.exports = class ApplicationPolicy {
 
     constructor(user, record) {
@@ -28,6 +30,18 @@ module.exports = class ApplicationPolicy {
 
     _isAdmin() {
         return this.user && this.user.role === "admin";
+    }
+
+    _isCollaborator() {
+        console.log("isCollaborator fired");
+        console.log("record: " + this.record.id);
+        console.log("user: " + this.user.id);
+        return Collaborator.findOne({
+            where: {
+              userId: this.user.id,
+              wikiId: this.record.id
+            }
+          })
     }
 
     new() {

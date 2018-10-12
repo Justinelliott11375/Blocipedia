@@ -11,7 +11,7 @@ module.exports = class wikiPolicy extends ApplicationPolicy {
     }
 
     edit() {
-        return this._isAdmin() || this._isOwner() || this._isPublic();
+        return this._isAdmin() || this._isOwner() || this._isPublic() || this._isCollaborator();
     }
 
     update() {
@@ -19,7 +19,7 @@ module.exports = class wikiPolicy extends ApplicationPolicy {
     }
 
     destroy() {
-        return this.update();
+        return this._isAdmin() || this._isOwner() || this._isPublic();
     }
 
     privatize() {

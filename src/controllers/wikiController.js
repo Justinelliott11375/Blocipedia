@@ -1,5 +1,7 @@
 const wikiQueries = require("../db/queries.wikis.js");
 const Authorizer = require("../policies/wiki");
+const Wiki = require("../db/models").Wiki;
+const Collaborator = require("../db/models").Collaborator;
 const markdown = require("markdown").markdown;
 
 module.exports = {
@@ -12,8 +14,21 @@ module.exports = {
                 res.redirect(500, "static/index");
             }
             else {
-                console.log("wikiController index/getAll else")
-                res.render("wikis/wiki", {wikis});
+                console.log("wikiController index/getAll else");
+                if (req.user) {
+                    Collaborator.findAll({
+                      where: { userId: req.user.id }
+                    })
+                    .then((collaborators) => {
+                      if (collaborators) {
+                        res.render("wikis/wiki", {wikis, collaborators});
+                      } else {
+                        res.render("wikis/wiki", {wikis});
+                      }
+                    })
+                } else {
+                    res.render("wikis/wiki", {wikis});
+                }
             }
         })
     },
