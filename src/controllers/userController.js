@@ -36,7 +36,7 @@ module.exports = {
     },
 
     signIn(req, res, next) {
-;        passport.authenticate("local")(req, res, function() {
+        passport.authenticate("local", { failureFlash: 'Invalid username or password.' })(req, res, function() {
             if(!req.user){
                 console.log("error")
                 req.flash("notice", "Sign in failed. Please try again.")
