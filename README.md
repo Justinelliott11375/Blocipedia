@@ -35,7 +35,7 @@
 ### Setup
 
 This app will require 2 postgres databases: "blocipedia" for development environment, and "blocipedia-test" for test environment. 
----
+Run `npm start` in the command line and the server should start at address `localhost:3000`
 
 ## Features
 
@@ -48,7 +48,7 @@ This app will require 2 postgres databases: "blocipedia" for development environ
 
 ## Tests (Optional)
 
-- This app uses jasmine test suites for testing. With jasmine installed you can run all tests from the command line with `npm test`.  
+- This app uses jasmine test suites for testing. With jasmine installed you can run all tests from the command line with `npm test`
 
 ## Technologies
 
@@ -65,7 +65,7 @@ This app will require 2 postgres databases: "blocipedia" for development environ
     - Fork this repo!
 
 - **Option 2**
-    - Clone this repo to your local machine using `https://github.com/joanaz/HireDot2.git`
+    - Clone this repo to your local machine using `https://github.com/justinelliott11375/collabipedia.git`
 
 ### Step 2
 
@@ -73,7 +73,7 @@ This app will require 2 postgres databases: "blocipedia" for development environ
 
 ### Step 3
 
--  Create a new pull request using <a href="https://github.com/joanaz/HireDot2/compare/" target="_blank">`https://github.com/joanaz/HireDot2/compare/`</a>.
+-  Create a new pull request!
 
 ---
 
