@@ -19,7 +19,7 @@ module.exports = {
             const msg = {
                 to: newUser.email,
                 from: "justin@justintylerelliott.com",
-                subject: 'Welcome to Blocipedia',
+                subject: 'Welcome to Collabipedia',
                 text: 'sample text',
                 html: '<strong>sample text</strong>',
               };
